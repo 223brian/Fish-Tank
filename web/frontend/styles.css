@@ -152,5 +152,32 @@ main {
             font-size: 3em;
             font-weight: 900;
         }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /*font-size: 14px;*/
+            color: #4b5563;
+
+            .status-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+
+            .status-dot.optimal {
+                background-color: #16a34a;
+            }
+
+            .status-dot.warning {
+                background-color: #d97706;
+            }
+
+            .status-dot.critical {
+                background-color: #dc2626;
+            }
+        }
     }
 }
