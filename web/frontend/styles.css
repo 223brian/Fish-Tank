@@ -61,12 +61,39 @@ main {
 .card {
     overflow: hidden;
     border-radius: var(--border-radius-card);
-    /*outline: 1px solid blue;*/
     box-shadow: var(--shadow-card);
     background-color: var(--bg-card);
 }
 
 .camera-feed {
+    position: relative;
+
+    .live-badge {
+        user-select: none;
+        position: absolute;
+        top: var(--spacing-sm);
+        left: var(--spacing-sm);
+
+        background-color: #ef4444;
+        color: #ffffff;
+        padding: 4px 10px;
+        border-radius: 9999px;
+
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+
+        img {
+            height: 14px;
+        }
+    }
+
     img {
         width: 100%;
         height: 100%;
