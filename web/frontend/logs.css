@@ -1,0 +1,30 @@
+.logs-container {
+    grid-column: 1 / -1; /* make it take up the full width */
+    padding: var(--spacing-lg);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-md);
+    text-align: left;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
