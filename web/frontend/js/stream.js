@@ -7,8 +7,6 @@ let hls = null;
 function loadVideoStream(url) {
     const video = document.getElementById("video-player");
 
-    video.muted = true;
-
     // clean up the old stream if one exists
     if (hls) {
         hls.destroy();
