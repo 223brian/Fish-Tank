@@ -1,0 +1,13 @@
+[Unit]
+Description=Fish Tank Sensor Script
+After=network-online.target
+
+[Service]
+User={USERNAME}
+WorkingDirectory={PATH_TO_HARDWARE_DIR}
+ExecStart=/usr/bin/python3 {PATH_TO_HARDWARE_DIR}/main.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
