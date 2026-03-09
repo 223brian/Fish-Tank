@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 User={USERNAME}
 # this assumes MediaMTX is running on the backend server.
-ExecStart=/bin/bash -c 'rm -f /tmp/cam_pipe.h264 && mkfifo /tmp/cam_pipe.h264 && (/usr/bin/ffmpeg -use_wallclock_as_timestamps 1 -f h264 -i /tmp/cam_pipe.h264 -c:v copy -f rtsp -pkt_size 1200 {RTSP_URL}/cam1 &) && /usr/bin/rpicam-vid -t 0 --inline --mode 2304:1296 --width 1280 --height 720 -o /tmp/cam_pipe.h264'
+ExecStart=/bin/bash -c 'rm -f /tmp/{CAM_NUMBER}_pipe.h264 && mkfifo /tmp/{CAM_NUMBER}_pipe.h264 && (/usr/bin/ffmpeg -use_wallclock_as_timestamps 1 -f h264 -i /tmp/{CAM_NUMBER}_pipe.h264 -c:v copy -f rtsp -pkt_size 1200 {RTSP_URL}/{CAM_NUMBER} &) && /usr/bin/rpicam-vid -t 0 --inline --mode 2304:1296 --width 1280 --height 720 -o /tmp/{CAM_NUMBER}_pipe.h264'
 ExecStopPost=/usr/bin/killall ffmpeg
 Restart=always
 RestartSec=5
