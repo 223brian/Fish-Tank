@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import sqlite3
@@ -95,4 +96,31 @@ frontend_dir = os.path.join(
 )
 app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
-init_db()
+
+def prune_old_data():
+    # delete readings older than 30 days
+    try:
+        with sqlite3.connect("fishtank.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "DELETE FROM sensor_data WHERE TIMESTAMP <= datetime('now', '-30 days')"
+            )
+            deleted_rows = cursor.rowcount
+            conn.commit()
+            if deleted_rows > 0:
+                print(f"Pruned {deleted_rows} old records from the database.")
+    except Exception as e:
+        print(f"Error pruning database: {e}")
+
+
+async def schedule_pruning():
+    # runs once every 24 hours
+    while True:
+        prune_old_data()
+        await asyncio.sleep(86400)
+
+
+@app.on_event("startup")
+async def startup_event():
+    init_db()
+    asyncio.create_task(schedule_pruning())
