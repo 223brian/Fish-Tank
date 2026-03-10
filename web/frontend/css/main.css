@@ -252,3 +252,32 @@ video::-webkit-media-controls-panel {
         }
     }
 }
+
+@media (max-width: 1000px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1000px) and (min-width: 751px) {
+    .metrics {
+        flex-direction: row;
+
+        .card {
+            flex: 1;
+
+            .status-indicator {
+                margin-bottom: var(--spacing-md);
+            }
+
+            .log-button {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-top: auto;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
