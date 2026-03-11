@@ -110,3 +110,12 @@ When `rpicam-vid` dumps raw data into the pipe, it strips all timestamps. If `ff
 
 **Why does the camera use `--mode 2304:1296`?**
 By default, changing the height or width of the image crops it. This flag forces it to stretch instead. (2304:1296 is the resolution of the camera we used).
+
+**Why does ffmpeg use `-rtsp_transport tcp`?**
+RTSP streams over UDP by default, which would be fine if low-latency was a priority, but can cause packet loss, freezing, and pixelation. This flag forces the use of TCP instead, which provides much higher quality and reliability, at the cost of a slightly longer delay.
+
+**Why does the camera use `--inline` and `--intra 30`?**
+For H.264 streaming, the video server needs keyframes and headers to start decoding. `--intra 30` forces an I-frame (keyframe) every 30 frames, and `--inline` ensures the necessary sequence headers (PPS/SPS) are written to the stream so the server can easily process the feed.
+
+**Why does the camera use `--denoise cdn_off`?**
+Disabling color denoise (`cdn_off`) reduces the hardware processing overhead on the Raspberry Pi, which helps maintain a stable stream without dropping frames.
