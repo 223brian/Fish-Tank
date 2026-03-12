@@ -34,7 +34,7 @@ async function fetchLogs() {
         // loop through history data and create the table
         data.forEach((reading) => {
             const row = document.createElement("tr");
-            const date = new Date(reading.timestamp);
+            const date = new Date(reading.timestamp.replace(" ", "T") + "Z");
             const timeString = date.toLocaleString();
 
             let value = reading[metric];
