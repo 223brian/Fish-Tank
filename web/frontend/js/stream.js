@@ -19,6 +19,11 @@ if (videoElement && spinnerElement) {
     videoElement.addEventListener("error", () =>
         spinnerElement.classList.remove("active"),
     );
+
+    // prevent pausing by immediately playing again
+    videoElement.addEventListener("pause", () => {
+        videoElement.play().catch((e) => console.log("Autoplay prevented", e));
+    });
 }
 
 function loadVideoStream(url) {
